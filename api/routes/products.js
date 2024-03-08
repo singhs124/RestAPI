@@ -1,9 +1,20 @@
 const express = require("express");
-const multer = require('multer')
-const upload = multer({dest: 'uploads/'})
 const router = express.Router();
 const Product = require("../models/productsSchema");
 const { Mongoose, default: mongoose } = require("mongoose");
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: (req,file,cb)=>{
+    cb(null,'./uploads/')
+  },
+  filename:(req,file,cb)=>{
+    cb(null, new Date().toISOString() + file.originalname)
+  }
+})
+
+const upload = multer({storage: storage})
+
 
 router.get("/", (req, res) => {
   Product.find()
