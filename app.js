@@ -5,6 +5,7 @@ const mongoose = require('mongoose') ;
 
 const ProductsRoute = require('./api/routes/products')
 const OrdersRoute = require('./api/routes/orders')
+const UserRoute = require('./api/routes/users')
 mongoose.connect('mongodb+srv://sushant:Atlas2024@cluster0.ls148ff.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 
 const app = express();
@@ -26,6 +27,8 @@ app.use(bodyParser.json());
 // })
 app.use('/products' , ProductsRoute);
 app.use('/orders' , OrdersRoute)
+app.use('/users' , UserRoute)
+
 
 app.get('/',(req,res)=>{
     res.send("Welcome to Page!");
